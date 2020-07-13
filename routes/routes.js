@@ -1,49 +1,76 @@
-const { Router, response } = require('express');
+const {  Router, query } = require('express');
 const path = require('path');
 const router = Router();
 
+router.get('/', (req,res)=>{
 
-router.get('/',(req,res)=>{
-  res.send('<h1>Hello World!</h1>');
+    res.send('<h1>Hello World!</h1>');
 });
 
 
-router.post('/save',(req,res)=>{
+router.post('/peticion',(req,res)=>{
+    
+    console.log(req.body.title);
+    console.log(req.body.category);
+    console.log(req.body.genre);
+    console.log(req.body.director);
+    console.log(req.body.Edad);
 
-  console.log(req.body);
+    const { title,
+        genre,
+        director,
+        Edad 
+    } = req.body;
+     
+    console.log(`dest: ${ director }`);
 
-  res.json(req.body);
-
+    let edad = req.body.Edad;
+    if(edad>=18){
+        res.status(200).json('El usuario es mayor de edad.');
+    }
+    res.status(201).json('No es mayor de edad');
 });
 
 
-router.get('/one-row/:id',(req,res)=>{
-  const id    = req.params.id;
-  console.log(id);
+router.get('/peticion/:id', (req,res)=>{
 
+    let user = req.params.id;
+
+    console.log(`peticion ${user}`);
+    res.json(`peticion: ${user} `);
+
+});
+
+//actualizar
+router.put('/peticion/:id',(req,res)=>{
+    
+    let user = req.params.id;
+
+    console.log(`peticion ${user}`);
+    res.json(`peticion: ${user} `);
+
+    
+
+});
+
+//Delete
+router.delete('/peticion/:id',(req,res)=>{
+    
+    let user = req.params.id;
+
+    console.log(`peticion ${user}`);
+    res.json(`peticion: ${user} `);
 });
 
 
 router.get('/movies',(req,res)=>{
-  
-  res.sendFile(path.join(__dirname, '../public/json', 'bd.json'));
+
+    res.sendFile(path.join(__dirname, '../public/json', 'bd.json'));
+
+    
 
 });
 
-
-/*
-router.post('/register', async (req, res) => {
-    const {
-          email,
-          phoneNumber,
-          password,
-          firstName,
-          lastName,
-          photoUrl
-        } = req.body;
-
-    });
-*/
 
 
 module.exports = router;
