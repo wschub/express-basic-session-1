@@ -6,7 +6,7 @@ const path = require('path');
 const cors = require('cors');
 
 const routes = require('./routes/routes');
-
+const route_biblioteca = require('./routes/biblioteca')
 
 /* Initializations */
 const app = express();
@@ -32,6 +32,7 @@ app.get('/', (req,res)=>{
 
 
 app.use('/api/',routes);
+app.use('/api/biblioteca/',route_biblioteca);
 //app.use(require('./routes/routes'));
 
 
