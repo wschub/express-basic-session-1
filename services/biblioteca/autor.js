@@ -57,3 +57,18 @@ exports.eliminarAutor = async(req, res) => {
         res.status(500).json('Se genero un erro en la base de datos')
     }
 }
+
+exports.actualizarAutor = async(req, res) => {
+	const {codigo_autor } = req.params
+	const {
+        nombre, 
+        apellido
+    } = req.body
+	try {
+        let respuesta = await cnn_mysql.promise().execute("UPDATE autor SET nombre = ?, apellido = ? WHERE codigo_autor = ?)", [codigo_autor,nombre,apellido])
+        res.status(200).json('El autor fue actualizado exitosamente')
+    } catch (error) {
+        
+        res.status(500).json('Se genero un erro en la base de datos')
+    }
+}
