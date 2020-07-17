@@ -36,6 +36,4 @@ app.use('/api/biblioteca/',route_biblioteca);
 //app.use(require('./routes/routes'));
 
 
-app.listen(app.get("port"), ()=>{
-    console.log(`Server on port ${process.env.PORT1}`);
-  })
+app.listen(app.get("port"), '0.0.0.0')
